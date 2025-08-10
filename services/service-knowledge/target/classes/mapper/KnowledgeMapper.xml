@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.knowledge.dao.KnowledgeDao">
+
+    <resultMap id="KnowledgeMap" type="com.knowledge.bean.Knowledge">
+        <id property="id" column="id" />
+        <result property="question" column="question" />
+        <result property="answer" column="answer" />
+        <result property="createdAt" column="created_at" />
+        <result property="lastActivity" column="last_activity" />
+    </resultMap>
+
+    <!-- 创建知识记录 -->
+    <insert id="createKnowledge" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO knowledge (question, answer, created_at, last_activity)
+        VALUES (#{question}, #{answer}, #{createdAt}, #{lastActivity})
+    </insert>
+
+    <!-- 根据ID获取知识记录 -->
+    <select id="getKnowledgeById" resultMap="KnowledgeMap">
+        SELECT id, question, answer, created_at, last_activity
+        FROM knowledge
+        WHERE id = #{id}
+    </select>
+
+    <!-- 获取所有知识记录 -->
+    <select id="getAllKnowledge" resultMap="KnowledgeMap">
+        SELECT id, question, answer, created_at, last_activity
+        FROM knowledge
+    </select>
+
+    <!-- 根据问题关键词搜索 -->
+    <select id="searchByQuestion" resultMap="KnowledgeMap">
+        SELECT id, question, answer, created_at, last_activity
+        FROM knowledge
+        WHERE question LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <!-- 更新整个知识记录 -->
+    <update id="updateKnowledge">
+        UPDATE knowledge
+        SET question = #{question},
+            answer = #{answer},
+            last_activity = #{lastActivity}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 只更新答案内容 -->
+    <update id="updateAnswer">
+        UPDATE knowledge
+        SET answer = #{answer},
+            last_activity = #{lastActivity}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除知识记录 -->
+    <delete id="deleteKnowledge">
+        DELETE FROM knowledge WHERE id = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,127 @@
+rocketmq:
+  mq-addr: localhost:9876
+  producer-group: QA_PRODUCER_GROUP
+  consumer-group: QA_CONSUMER_GROUP
+
+# 大语言模型API配置
+model:
+  api:
+    url: https://spark-api-open.xf-yun.com/v1/chat/completions
+    password: KNmNCIhHRDlFRiIaJKgx:xxFtfiywcUMaXZfTJGNY
+
+server:
+  port: 8040
+
+spring:
+  profiles:
+    active: dev
+    include: feign
+  application:
+    name: service-model
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        import-check:
+          enabled: false
+        namespace: ${spring.profiles.active:dev}
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 31440414v
+    url: jdbc:mysql://localhost:3306/session_qa_db?useUnicode=true&characterEncoding=utf-8&8allowWMulti
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 连接池配置
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+      # 监控配置
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: admin
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+
+jwt:
+  secret: "7A2B4C6D8E0F1A3B5C7D9E0F1A2B3C4D5E6F7A8B9C0D1E2F3A4B5C6D7E8F9A0B1C2D3E4F5A6B7C8D9E0F1A2B3C4D5E6F7A8B9C0D1E2F3A4B5C6D7E8F9A0B1567"
+  expiration: 3600000 # 1小时
+
+#server:
+#  port: 8000
+#
+#spring:
+#  profiles:
+#    active: test
+#    include: feign
+#  application:
+#    name: service-order
+#  cloud:
+#    nacos:
+#      server-addr: 127.0.0.1:8848
+#      config:
+#        import-check:
+#          enabled: false
+#        namespace: ${spring.profiles.active:public}
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: 31440414v
+#    url: jdbc:mysql://localhost:3306/order_db?useUnicode=true&characterEncoding=utf-8&8allowWMulti
+#
+#
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    map-underscore-to-camel-case: true #数据库下划线和驼峰映射
+#
+#logging:
+#  level:
+#    com.order.feign: debug
+#
+#---
+#spring:
+#  config:
+#    import:
+#      - nacos:common.properties?group=order
+#      - nacos:database.properties?group=order
+#    activate:
+#      on-profile: dev
+#
+#---
+#spring:
+#  config:
+#    import:
+#      - nacos:common.properties?group=order
+#      - nacos:database.properties?group=order
+#    activate:
+#      on-profile: test
+#
+#---
+#spring:
+#  config:
+#    import:
+#      - nacos:common.properties?group=order
+#      - nacos:database.properties?group=order
+#    activate:
+#      on-profile: prod

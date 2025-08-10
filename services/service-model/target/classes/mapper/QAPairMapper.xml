@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.model.dao.QAPairDao">
+    <resultMap id="qaPairResultMap" type="com.session.bean.QAPair">
+        <id property="id" column="id"/>
+        <result property="sessionId" column="session_id"/>
+        <result property="question" column="question"/>
+        <result property="answer" column="answer"/>
+        <result property="askTime" column="ask_time"/>
+        <result property="answerTime" column="answer_time"/>
+        <result property="responseDuration" column="response_duration"/>
+    </resultMap>
+
+    <insert id="createQaPair" parameterType="com.session.bean.QAPair"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO qa_pair (session_id, question, ask_time)
+        VALUES (#{sessionId}, #{question}, #{askTime})
+    </insert>
+
+    <update id="updateAnswer" parameterType="map">
+        UPDATE qa_pair
+        SET answer = #{answer},
+            answer_time = #{answerTime}
+        WHERE id = #{id}
+    </update>
+    <update id="updateResponseDuration" parameterType="map">
+        UPDATE qa_pair
+        SET response_duration = #{duration}
+        WHERE id = #{id}
+    </update>
+
+    <select id="getQaPairsBySession" resultMap="qaPairResultMap">
+        SELECT * FROM qa_pair
+        WHERE session_id = #{sessionId}
+        ORDER BY ask_time ASC
+    </select>
+
+    <select id="getQaPairById" resultMap="qaPairResultMap">
+        SELECT * FROM qa_pair
+        WHERE id = #{id}
+    </select>
+</mapper>

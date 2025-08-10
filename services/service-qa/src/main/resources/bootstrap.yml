@@ -1,0 +1,17 @@
+#spring:
+#  application:
+#    name: service-order
+#  cloud:
+#    nacos:
+#      username: nacos
+#      password: nacos
+#      config:
+#        server-addr: 127.0.0.1:8848
+#        namespace: dev  # 根据启动参数切换
+#        group: ORDER_GROUP
+#        file-extension: yaml
+#
+#  config:
+#    import:
+#      - optional:nacos:order.yaml?group=ORDER_GROUP
+#      - optional:nacos:datasource.yaml?group=ORDER_GROUP

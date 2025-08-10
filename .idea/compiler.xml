@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="service-knowledge" />
+        <module name="service-history" />
+        <module name="service-qa" />
+        <module name="java_demo1" />
+        <module name="model" />
+        <module name="web_demo" />
+        <module name="service-model" />
+        <module name="service-auth" />
+        <module name="gateway" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="service-order" target="1.8" />
+      <module name="service-product" target="1.8" />
+      <module name="service-system" target="1.8" />
+      <module name="service-view" target="1.8" />
+      <module name="web_demo (1)" target="21" />
+      <module name="web_demo (2)" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cloud-demo" options="" />
+      <module name="gateway" options="-parameters" />
+      <module name="java_demo1" options="-parameters" />
+      <module name="model" options="-parameters" />
+      <module name="service-auth" options="-parameters" />
+      <module name="service-history" options="-parameters" />
+      <module name="service-knowledge" options="-parameters" />
+      <module name="service-model" options="-parameters" />
+      <module name="service-order" options="-parameters" />
+      <module name="service-product" options="-parameters" />
+      <module name="service-qa" options="-parameters" />
+      <module name="service-system" options="-parameters" />
+      <module name="service-view" options="-parameters" />
+      <module name="services" options="" />
+      <module name="web_demo" options="-parameters" />
+      <module name="web_demo (1)" options="-parameters" />
+      <module name="web_demo (2)" options="-parameters" />
+    </option>
+  </component>
+</project>

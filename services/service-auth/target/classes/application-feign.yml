@@ -1,0 +1,26 @@
+#spring:
+#  cloud:
+#    openfeign:
+#      client:
+#        config:
+#          default:
+#            logger-level: full
+#            connect-timeout: 1000
+#            read-timeout: 2000
+#          service-product:
+#            logger-level: full
+#            connect-timeout: 3000
+#            read-timeout: 5000
+#
+#    sentinel:
+#      transport:
+#        dashboard: localhost:8080
+#      #由于Sentinel是懒加载机制，只有请求才会在客户端刷新，所以这里eager为true
+#      eager: true
+#
+#      #流控规则-链路需要将上下文一致关闭，要不然没法使用
+#      web-context-unify: false
+#
+#feign:
+#  sentinel:
+#    enabled: true

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.model.dao.SessionDao">
+    <resultMap id="sessionResultMap" type="com.session.bean.Session">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="title" column="title"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="lastActivity" column="last_activity"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <insert id="createSession" parameterType="com.session.bean.Session">
+        INSERT INTO session (id, user_id, title, created_at, last_activity, status)
+        VALUES (#{id}, #{userId}, #{title}, #{createdAt}, #{lastActivity}, #{status})
+    </insert>
+
+    <update id="updateSession" parameterType="com.session.bean.Session">
+        UPDATE session
+        SET title = #{title},
+            last_activity = #{lastActivity},
+            status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <select id="getSessionById" resultMap="sessionResultMap">
+        SELECT * FROM session WHERE id = #{id}
+    </select>
+
+    <select id="getSessionsByUser" resultMap="sessionResultMap">
+        SELECT * FROM session
+        WHERE user_id = #{userId}
+        ORDER BY last_activity DESC
+    </select>
+
+    <update id="updateLastActivity">
+        UPDATE session
+        SET last_activity = #{time}
+        WHERE id = #{id}
+    </update>
+
+    <update id="closeSession">
+        UPDATE session
+        SET status = 0
+        WHERE id = #{id}
+    </update>
+</mapper>
